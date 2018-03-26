@@ -1,6 +1,14 @@
 {
   "name": "blockchain",
   "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT"
+  "main": "src/app.ts",
+  "license": "MIT",
+  "dependencies": {},
+  "scripts": {
+    "dev": "tsc-watch src/app.ts --outDir ./dist --onSuccess \"node ./dist/app.js\" --onFailure \"echo Beep! Compilation Failed\""
+  },
+  "devDependencies": {
+    "tsc-watch": "^1.0.17",
+    "typescript": "^2.7.2"
+  }
 }
