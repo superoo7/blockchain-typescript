@@ -1,19 +1,11 @@
 
+interface TransactionData {
 
-export class TransactionClass {
+}
+
+export default class Transaction {
 
     constructor(private from: String, private to: String, private amount: Number) {
     }
 
-    getFrom() {
-        return this.from;
-    }
-
-    getTo() {
-        return this.to;
-    }
-
-    getAmount() {
-        return this.amount;
-    }
 }
