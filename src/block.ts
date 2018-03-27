@@ -1,11 +1,11 @@
 
 
 export default class Block {
-    private index: Number;
-    private previousHash: String;
-    private hash: String;
-    private nonce: Number;
-    private transactions: Number[];
+    public index: number;
+    public previousHash: String;
+    public hash: String;
+    public nonce: number;
+    public transactions: String[];
 
     constructor() {
         this.index = 0;
@@ -19,7 +19,7 @@ export default class Block {
         return JSON.stringify(this.transactions) + this.index + this.previousHash + this.nonce;
     }
 
-    addTransaction(transaction: Number): void {
+    addTransaction(transaction: String): void {
         this.transactions.push(transaction);
     }
 }

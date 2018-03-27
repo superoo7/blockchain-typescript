@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "main": "src/app.ts",
   "license": "MIT",
+  "typescript": {
+		"definitions": [
+      "src/types.d.ts",
+      "src/interfaces.d.ts"
+    ]
+	},
   "dependencies": {
     "js-sha256": "^0.9.0"
   },
