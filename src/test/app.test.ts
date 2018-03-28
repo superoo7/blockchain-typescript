@@ -1,6 +1,6 @@
-import Block from './block';
-import BlockChain from './blockchain';
-import Transaction from './transaction';
+import Block from '../block';
+import BlockChain from '../blockchain';
+import Transaction from '../transaction';
 
 interface TransactionData {
     from: string;

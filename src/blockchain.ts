@@ -1,6 +1,14 @@
 import sha256 from 'js-sha256';
 import Block from './block';
 
+interface BlockChainData {
+    blocks: BlockData[];
+    genesisBlock: BlockData;
+    addBlock(block: BlockData): void;
+    getNextBlock(transactions: TransactionData[]): BlockData;
+    generateHash(block: BlockData) : string;
+}
+
 interface BlockData {
     index: number,
     hash: string;
@@ -15,10 +23,11 @@ interface TransactionData {
     to: string,
     amount: number
 }
-export default class Blockchain {
-    private blocks: BlockData[];
+export default class Blockchain implements BlockChainData {
+    public blocks: BlockData[];
+    public genesisBlock: BlockData;
 
-    constructor(private genesisBlock: any) {
+    constructor(genesisBlock: BlockData) {
         this.blocks = [];
         this.addBlock(genesisBlock);
     }
