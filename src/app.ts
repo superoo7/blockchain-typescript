@@ -1,4 +1,5 @@
 import express = require('express');
+import bodyParser = require('body-parser');
 
 import Block from './block';
 import BlockChain from './blockchain';
@@ -10,11 +11,24 @@ interface TransactionData {
     amount: number;
 }
 
+// Transactions
+let transactions: TransactionData[] = [];
+
 // API
 const app = express();
 
+app.use(bodyParser.json());
+
 app.get('/', function(req, res) {
     res.send("hello world");
+})
+
+app.post('/transactions', function(req, res) {
+    let {to, from, amount} = req.body;
+    console.log(`Transfer ${amount} from ${from} to ${to}`);
+    let transaction = new Transaction(from, to, amount);
+    transactions = [...transactions, transaction];
+    res.json(transactions);
 })
 
 app.get('/blockchain', function(req, res) {
