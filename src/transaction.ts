@@ -1,17 +1,13 @@
 
-
-export interface TransactionData {
-    from: String,
-    to: String,
-    amount: Number
+interface TransactionData {
+    from: string;
+    to: string;
+    amount: number;
 }
 
+export default class Transaction implements TransactionData{
 
-
-
-export default class Transaction<TransactionData>  {
-
-    constructor(private from: String, private to: String, private amount: Number) {
+    constructor(public from: string, public to: string, public amount: number) {
     }
 
 }

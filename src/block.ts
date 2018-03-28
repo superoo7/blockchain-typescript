@@ -1,25 +1,34 @@
+interface TransactionData {
+    from: string,
+    to: string,
+    amount: number
+}
 
+interface BlockData {
+    index: number,
+    hash: string;
+    previousHash: string;
+    nonce: number;
+    transactions: TransactionData[];
+    key: string;
+}
 
-export default class Block {
-    public index: number;
-    public previousHash: String;
-    public hash: String;
-    public nonce: number;
-    public transactions: String[];
+export default class Block implements BlockData {
 
-    constructor() {
-        this.index = 0;
-        this.previousHash = '';
-        this.hash = '';
-        this.nonce = 0;
-        this.transactions = [];
+    constructor(
+        public index: number = 0,
+        public hash: string = '', 
+        public previousHash: string = '', 
+        public nonce: number = 0,
+        public transactions: TransactionData[] = []
+    ) {
     }
 
-    get key(): String {
+    get key(): string {
         return JSON.stringify(this.transactions) + this.index + this.previousHash + this.nonce;
     }
 
-    addTransaction(transaction: String): void {
-        this.transactions.push(transaction);
+    public addTransaction(t: TransactionData): void {
+        this.transactions = [...this.transactions, t];
     }
 }

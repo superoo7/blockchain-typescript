@@ -1,15 +1,20 @@
 import sha256 from 'js-sha256';
 import Block from './block';
 
-export interface BlockData {
+interface BlockData {
     index: number,
-    hash: String;
-    previousHash: String;
+    hash: string;
+    previousHash: string;
     nonce: number;
-    transactions: String[];
-    key: String;
+    transactions: TransactionData[];
+    key: string;
 }
 
+interface TransactionData {
+    from: string,
+    to: string,
+    amount: number
+}
 export default class Blockchain {
     private blocks: BlockData[];
 
@@ -26,10 +31,10 @@ export default class Blockchain {
         this.blocks.push(block);
     }
 
-    getNextBlock(transactions: String[]) : BlockData {
+    getNextBlock(transactions: TransactionData[]) {
         let block = new Block();
 
-        transactions.forEach(function(t: String) {
+        transactions.forEach(function(t: TransactionData) {
             block.addTransaction(t);
         })
 
@@ -45,7 +50,7 @@ export default class Blockchain {
         return this.blocks[this.blocks.length - 1]
     }
 
-    generateHash(block: BlockData) : String {
+    generateHash(block: BlockData) : string {
         let hash = sha256(block.key);
 
         // Mining
