@@ -11,8 +11,10 @@ interface TransactionData {
     amount: number;
 }
 
-// Transactions
+// Transactions & Blockchain
 let transactions: TransactionData[] = [];
+let genesisBlock = new Block();
+let blockchain = new BlockChain(genesisBlock);
 
 // API
 const app = express();
@@ -31,18 +33,13 @@ app.post('/transactions', function(req, res) {
     res.json(transactions);
 })
 
+app.get('/mine', function(req, res) {
+    let mineBlock = blockchain.getNextBlock(transactions);
+    blockchain.addBlock(mineBlock);
+    res.json(mineBlock);
+})
+
 app.get('/blockchain', function(req, res) {
-    let transaction : TransactionData = new Transaction('Han', 'Yan', 12);
-
-    let genesisBlock = new Block();
-    let blockchain = new BlockChain(genesisBlock);
-
-    let block = blockchain.getNextBlock([transaction]);
-    blockchain.addBlock(block);
-
-    let anotherTransaction: TransactionData = new Transaction("tester1", "tester2", 10);
-    let block1 = blockchain.getNextBlock([anotherTransaction, transaction]);
-
     res.json(blockchain);
 })
 
