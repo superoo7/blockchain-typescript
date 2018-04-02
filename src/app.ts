@@ -13,7 +13,7 @@ interface TransactionData {
 }
 
 interface BlockchainNodeData {
-    url: string;
+    code: string;
 }
 
 // Transactions & Blockchain
@@ -42,6 +42,7 @@ app.post('/transactions', function(req, res) {
 app.get('/mine', function(req, res) {
     let mineBlock = blockchain.getNextBlock(transactions);
     blockchain.addBlock(mineBlock);
+    transactions = [];
     res.json(mineBlock);
 })
 
@@ -62,7 +63,7 @@ app.get('/nodes', function(req, res) {
     res.json(nodes);
 })
 
-app.listen(3000, function() {
+app.listen(process.argv[2] || '3000', function() {
     console.log('server started');
 })
 

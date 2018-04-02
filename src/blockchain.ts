@@ -3,9 +3,9 @@ import Block from './block';
 
 interface BlockChainData {
     blocks: BlockData[];
-    genesisBlock: BlockData;
     addBlock(block: BlockData): void;
     getNextBlock(transactions: TransactionData[]): BlockData;
+    getPreviousBlock() : BlockData;
     generateHash(block: BlockData) : string;
 }
 
@@ -25,7 +25,6 @@ interface TransactionData {
 }
 export default class Blockchain implements BlockChainData {
     public blocks: BlockData[];
-    public genesisBlock: BlockData;
 
     constructor(genesisBlock: BlockData) {
         this.blocks = [];
@@ -61,14 +60,12 @@ export default class Blockchain implements BlockChainData {
 
     generateHash(block: BlockData) : string {
         let hash = sha256(block.key);
-
         // Mining
         while(!hash.startsWith("000")){
             block.nonce = block.nonce + 1;
             hash = sha256(block.key);
             console.log(hash);
         }
-
         return hash;
     }
 }
