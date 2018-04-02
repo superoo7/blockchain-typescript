@@ -6,4 +6,9 @@ declare module 'js-sha256' {
     export default sha256;
 }
 
-//
+// // node-machine-id
+// declare module 'node-machine-id' {
+//     function machineIdSync(): string;
+
+//     export {machineIdSync};
+// }
